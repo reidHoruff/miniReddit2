@@ -173,7 +173,7 @@ a.btn-primary {
   background: #369;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 480px) {
     img {
       display: none;
     }
@@ -182,26 +182,46 @@ a.btn-primary {
       display: none;
     }
 
-    .score {
+    .content > .post > .scoring {
       display: none;
     }
 
     .content > .info {
-      display: none;
+      font-size: 14px;
+    }
+
+    .content > .info .dull2 {
+      font-size: 14px;
+    }
+
+    .content > .info .dull4 {
+      font-size: 14px;
     }
 
     .post > .content > .actions a {
-      font-size: 16px;
+      font-size: 14px;
     }
 
     .content > .expandbuttons {
+      display: none;
+    }
+
+    .content > .post > .content {
+      margin: 0px;
+      width: 100%;
+    }
+
+    .post > .content > .title h4 {
+      font-size: 20px;
+      line-height: 22px;
     }
 
     .comment a.action {
       display: none;
     }
 
-    .comment .commtitle {
+    .comment .commbody p {
+      font-size: 18px;
     }
 
     .comment .comment .comment .comment {
