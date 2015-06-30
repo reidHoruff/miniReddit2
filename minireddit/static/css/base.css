@@ -76,6 +76,7 @@ body > .header > .sublist {
   line-height: 18px;
   padding-left: 18px;
   background: #eee;
+  overflow: hidden;
 }
 
 .sublist a {
@@ -136,6 +137,7 @@ body > .header > .sublist {
 }
 
 .scoring {
+  text-align: center;
   width: 50px;
 }
 
@@ -162,10 +164,47 @@ img.flip {
   -ms-filter: "FlipV";
 }
 
+
 a.btn-primary {
   font-weight: bold;
   padding-top: 4px;
   padding-bottom: 4px;
   color: white;
   background: #369;
+}
+
+@media only screen and (max-width: 767px) {
+    img {
+      display: none;
+    }
+
+    .sublist {
+      display: none;
+    }
+
+    .score {
+      display: none;
+    }
+
+    .content > .info {
+      display: none;
+    }
+
+    .post > .content > .actions a {
+      font-size: 16px;
+    }
+
+    .content > .expandbuttons {
+    }
+
+    .comment a.action {
+      display: none;
+    }
+
+    .comment .commtitle {
+    }
+
+    .comment .comment .comment .comment {
+      display: none;
+    }
 }

@@ -197,12 +197,28 @@ def getbody(request):
 
     yield InsertTemplate(".body-insert-%s" % post_id, "body.html", args)
 
+SHOW = """
+<a href="#showimg" data-sniper="/async/showimg/?post_id=%s&show" class="expand">
+  <p>+</p>
+</a>
+"""
+
+HIDE = """
+<a href="#hideimg" data-sniper="/async/showimg/?post_id=%s&hide" class="expand">
+  <p>-</p>
+</a>
+"""
 @sniper.ajax()
 def showimg(request):
     post_id = request.REQUEST['post_id']
     post = Post.objects.get(id=post_id)
-    img = """<img src="%s"></img>""" % post.url
-    yield InsertText(".body-insert-%s" % post_id, img)
+    if 'show' in request.REQUEST:
+        img = """<img src="%s"></img>""" % post.url
+        yield InsertText(".body-insert-%s" % post_id, img)
+        yield InsertText(".expandbtn-%s" % post_id, HIDE % post_id)
+    else:
+        yield InsertText(".body-insert-%s" % post_id, "")
+        yield InsertText(".expandbtn-%s" % post_id, SHOW % post_id)
 
 @sniper.ajax()
 def vote(request):

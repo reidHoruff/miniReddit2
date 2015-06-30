@@ -25,7 +25,7 @@
 {% block content %}
   {% for post in posts %}
     <div class="post">
-      <div class="scoring c">
+      <div class="scoring ppp">
         <a href="#up" data-sniper="/async/vote?type=post&id={{post.id}}&value=u">
           <img class="arrow-up" src="/static/img/up.png"></img>
         </a>
@@ -44,17 +44,19 @@
       <div class="content">
         <a href="{{post.url}}" class="title"><h4>{{post.title}}</h4></a>
 
-        {% if post.is_raw_imgur %}
-        <a href="#showimg" data-sniper="/async/showimg/?post_id={{post.id}}" class="expand">
-          <p>+</p>
-        </a>
-        {% elif post.body %}
-        <a href="#getbody" data-sniper="/async/getbody/?post_id={{post.id}}" class="expand">
-          <p>+</p>
-        </a>
-        {% endif %}
+        <div class="expandbuttons expandbtn-{{post.id}">
+          {% if post.is_raw_imgur %}
+          <a href="#showimg" data-sniper="/async/showimg/?post_id={{post.id}}&show" class="expand">
+            <p>+</p>
+          </a>
+          {% elif post.body %}
+          <a href="#getbody" data-sniper="/async/getbody/?post_id={{post.id}}" class="expand">
+            <p>+</p>
+          </a>
+          {% endif %}
+        </div>
 
-        <p class="dull">
+        <p class="dull info">
           {% if post.nsfw %}
             <span class="nsfw">NSFW</span>
           {% endif %}
@@ -67,8 +69,9 @@
         </p>
 
         <div class="actions">
-          <a href="/r/{{post.sub.name}}/post/{{post.id}}" class="dull4 commentslink"><p>{{post.comments.count}} comments</p></a>
-          <a href="/r/{{post.sub.name}}/post/{{post.id}}" class="dull4 commentslink"><p>save</p></a>
+          <a href="/r/{{post.sub.name}}/post/{{post.id}}" class="dull4 commentslink">
+            <p>{{post.comments.count}} comments</p>
+          </a>
         </div>
 
         <div class="body-insert body-insert-{{post.id}}"></div>
