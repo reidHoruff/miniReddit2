@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load sniper %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    {% sniper_onload %}
+
+    {% block head %}
+    <meta charset="utf-8">
+
+    <title>{% block title %}&mu;eddit{% endblock %}</title>
+
+    <link href="{% static 'bs/css/bootstrap.min.css' %}" type="text/css" rel="stylesheet"/>
+    <!--    <link href="http://bootswatch.com/darkly/bootstrap.min.css" type="text/css" rel="stylesheet"/> -->
+    <link href="{% static 'css/base.css' %}" type="text/css" rel="stylesheet"/>
+
+    {% endblock %}
+
+    {% block extracss %}{% endblock %}
+  </head>
+
+  <body>
+    <div class="sublist">
+      {% if user.is_authenticated %}
+        {% for sub in user.subscribed_to.all %}
+          <a href="{{sub.url}}">{{sub.name}}</a>
+        {% endfor %}
+      {% else %}
+        {% for sub in all_subs %}
+          <a href="{{sub.url}}">{{sub.name}}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="header">
+      <a href="/"><h1 class="title">&mu;eddit</h1></a>
+      <div class="subtitle">
+        {% block subtitle %}
+        {% endblock %}
+      </div>
+      {% if user.is_authenticated %}
+        <div class="login">
+          <a href="/u/{{user.username}}">{{user.username}}</a>
+            |
+          <a href="#logout" data-sniper="/async/logout/">logout</a>
+        </div>
+      {% endif %}
+    </div>
+
+
+    {% block body %}
+    <div class="container-fluid">
+      {% block contained %}
+        NOTHING!!
+      {% endblock %}
+    </div>
+    {% endblock %}
+
+  <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'bs/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/sniper.js' %}"></script>
+    {% block js %}{% endblock %}
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+
+{% block head %}
+  {{block.super}}
+  <link href="{% static 'css/login.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block contained %}
+<h2>Login to &mu;eddit</h2>
+<h3 id="error"></h3>
+<div class="row">
+  <div class="col-md-3">
+    <form method="POST" action="/async/login/" data-sniper="true">
+      {{form.username}}
+      {{form.password}}
+      {% csrf_token %}
+      <input class="btn btn-success" type="submit" value="login" />
+    </form>
+  </div>
+</div>
+{% endblock %}

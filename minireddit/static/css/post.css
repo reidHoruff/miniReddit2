@@ -1,0 +1,103 @@
+a.postlink {
+  color: #369;
+}
+
+.postbody {
+  padding: 6px;
+  background: #f5f5ff;
+  border-radius: 2px;
+  border: 1px solid #ddd;
+}
+
+.postbody p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.postbody h1, 
+.postbody h2,
+.postbody h3,
+.postbody h4 {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.postbody h1 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.postbody h2 {
+  font-size: 22px;
+}
+
+.postbody h3 {
+  font-size: 20px;
+}
+
+form > textarea {
+  background: #efefef;
+  max-width: 600px;
+  height: 150px;
+}
+
+.rootcomment {
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.rootcomment > form > textarea {
+  background: #efefef;
+  border: none;
+}
+
+div.comments {
+  margin-top: 36px;
+}
+
+.comment {
+  padding: 8px;
+  margin-bottom: 8px;
+  border: 1px solid #eee;
+  border-radius: 2px;
+}
+
+.comment .comment {
+  margin: 8px;
+}
+
+.comment p {
+  padding: 0px;
+  margin: 0px;
+}
+
+.comment p.commtitle {
+  margin-bottom: 4px;
+}
+
+div.comment div.comment {
+}
+
+div.colora {
+  background: #f8f8fa;
+}
+
+div.colorb {
+  background: white;
+}
+
+div.replybox {
+  margin-left: 10px;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+div.replybox textarea {
+  background: #eee;
+  height: 120px;
+}
+
+.postbody, .commbody p {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}

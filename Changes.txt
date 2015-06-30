@@ -1,0 +1,10 @@
+Currently I do not plan on implementing the concept of 'subreddis' or 'boards'. All posts will simply be posted the a single site wide board.
+
+You will also not be able to submit text-only posts, all posts must contain a link to an internal or external website. I may not implement voting for comments and only for posts. Comments will still be infinately nestable, they will just be displayed in chronological order. 
+
+===
+update 2
+===
+
+I did infact implement the concept of subreddits, and users are able to submit text only posts, and comments can be voted on.
+So far I have implemented everything from my initial proposal except for the mobile friendly version of the site. This is still to come.

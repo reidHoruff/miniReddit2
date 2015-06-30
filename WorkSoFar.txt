@@ -1,0 +1,21 @@
+So far I have set up a django project, virtual environment and small sql database.
+
+The site contains basic functionality such as account creation, logging in, logging out and the beginning of post submition. I have also created a small html template heirarchy that will make further page creation easy. I have also spent time building up the architecture so that further implementation should be easier/faster.
+
+
+===
+update 2
+===
+
+a bulleted list of what I have worked on so far
+* subreddits
+* users can crate subreddits
+* users can subscribe and unsubscribe from subreddits
+* users can post link or text posts
+* users can post a comment to a post or reply to a comment in a post
+* users can vote on posts
+* post commnets are infinitely nestable
+* users can vote on comments
+* comments and post text now supports the markdown language so that comments can be styled
+* I wrote a scraper that uses reddit's official api to pull data and inject it into mini-reddit
+* because some of the nested comment threads are so large I had to incorporate caching

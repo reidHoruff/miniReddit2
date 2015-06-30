@@ -1,0 +1,33 @@
+{% load markdown_deux_tags %}
+<div id="comment-{{comment.comment.id}}" class="comment {{color}}">
+  <p class="dull2 commtitle">
+    <span class="dull">[</span> 
+    <a data-sniper="/async/vote/?id={{comment.comment.id}}&type=comment&value=u" href="#up" class="dull2">+</a>
+    <a data-sniper="/async/vote/?id={{comment.comment.id}}&type=comment&value=d" href="#down" class="dull2">-</a>
+    <span class="dull">]</span>
+
+    <a href="/u/{{comment.comment.author.username}}" class="dull2">{{comment.comment.author.username}}</a> 
+    <span class="dull">&mu;</span> 
+    <span class="dull3" id="comm_score_{{comment.comment.id}}">{{comment.comment.score}} points</span>
+  </p>
+  <div class="commbody">{{comment.comment.body|markdown}}</div>
+  <a class="dull4" href="#hide" onclick="hide_comment({{comment.comment.id}})">hide</a>
+  <a class="dull4" href="#reply" data-sniper="/async/view_comment_reply?parent_id={{comment.comment.id}}&post_id={{post.id}}">reply</a>
+  <div class="reply-box-{{comment.comment.id}}"></div>
+
+  <div class="children">
+    {% for cc in comment.children %}
+      {% with template_name="recur_comment_view.html" post=post comment=cc color=ncolor ncolor=color %}
+        {% include template_name %}
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+
+{% block js %}
+<script type="text/javascript">
+function hide_comment(id) {
+  $("#comment-" + id).hide();
+}
+</script>
+{% endblock %}

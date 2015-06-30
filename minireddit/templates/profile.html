@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+{% load markdown_deux_tags %}
+
+{% block head %}
+  {{block.super}}
+  <link href="{% static 'css/profile.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block contained %}
+  {% for comment in owner.comments.all %}
+    <div class="comment {{color}}">
+      <p class="dull3">
+        in 
+        <a href="{{comment.post.sub.url}}" class="dull2">{{comment.post.sub.url}}</a> 
+        on 
+        <a href="{{comment.post.reddit_url}}" class="dull2">{{comment.post.title}}</a>
+      </p>
+      <p class="dull2">
+        <a class="dull2" href="/u/{{comment.author.username}}">{{comment.author.username}}</a> 
+        <span class="dull">&mu;</span> 
+        <span class="dull3">{{comment.score}} points</span>
+      </p>
+      <p>{{comment.body|markdown}}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

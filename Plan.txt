@@ -1,0 +1,9 @@
+
+Over the next week or so I plan to complete the posting functionality and add rudimentary comments system. I will also try to implement the post voting system. I may not implement voting for comments - only for posts.
+
+===
+update 2
+===
+
+All i have left to do is create a mobile friendly version of the site. That is what I will be working on over the next day.
+My expected functionality for presentation day is everything i listed in my project proposal.

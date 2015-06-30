@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+
+{% block head %}
+  {{block.super}}
+  <link href="{% static 'css/submit.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block contained %}
+<h3>Submit a link to &mu;eddit</h3>
+<p class="dull4">leave url field empty to create a text only post</p>
+<h3 id="error"></h3>
+<div class="row">
+  <div class="col-md-3">
+    <form method="POST" action="/async/submit/" data-sniper="true">
+      {% csrf_token %}
+      {{form.subreddit}}
+      {{form.title}}
+      {{form.url}}
+      {{form.body}}
+      <br/>
+      <label>NSFW</label>
+      {{form.nsfw}}
+      <br/>
+      <br/>
+      <input class="btn" type="submit" value="submit" />
+    </form>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+*.pyc
+.DS_Store
+.DS_Store?
+.mysession.vim
+.session.vim
+minireddit/sniper
+venv/

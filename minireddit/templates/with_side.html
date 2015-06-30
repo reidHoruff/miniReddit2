@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+
+{% block extracss %}
+  {{block.super}}
+  <link href="{% static 'css/with_side.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block subtitle %}
+{% endblock %}
+
+{% block contained %}
+<div class="row">
+  <div class="col-md-9 content">
+    {% block content %}
+    {% endblock %}
+  </div>
+
+  <div class="col-md-3 sidebar">
+    {% if not user.is_authenticated %}
+    <h3 id="error"></h3>
+    <form class="loginform" method="POST" action="/async/login/" data-sniper="true">
+      {{form.username}}
+      {{form.password}}
+      {% csrf_token %}
+      <input class="btn btn-success" type="submit" value="login" />
+    </form>
+
+    <a href="/register/" class="btn btn-primary createaccount">create an account</a>
+    <br />
+    {% endif %}
+
+    {% if is_sub %}
+      <div id="subbutton">
+        {% if issubbed %}
+          <a data-sniper="/async/subscribe/?a=u&sub={{subreddit}}" href="#" class="btn btn-danger">unsubscribe from /r/{{subreddit}}</a>
+        {% else %}
+          <a data-sniper="/async/subscribe/?a=s&sub={{subreddit}}" href="#" class="btn btn-success">subscribe to /r/{{subreddit}}</a>
+        {% endif %}
+      </div>
+      <br />
+    {% endif %}
+
+    <a href="/createsub/" class="btn btn-primary">create a subreddit</a>
+    <br />
+
+    <a href="/submit/" class="btn btn-primary">submit a link</a>
+    <br />
+
+    {% if is_sub %}
+      <a href="/submit/?sub={{subreddit}}" class="btn btn-primary">submit a link to /r/{{subreddit}}</a>
+      <br />
+      <div class="about">
+        <h3>{{subreddit}}</h3>
+        subscribers: {{subscribers}}
+      </div>
+    {% endif %}
+  </div>
+</div>
+  {% block end %}
+  {% endblock %}
+{% endblock %}

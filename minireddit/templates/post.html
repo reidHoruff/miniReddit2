@@ -1,0 +1,61 @@
+{% extends 'with_side.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+{% load markdown_deux_tags %}
+
+{% block title %}&mu;eddit - {{post.title}}{% endblock %}
+
+{% block extracss %}
+  {{block.super}}
+  <link href="{% static 'css/post.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block subtitle %}
+  {% if is_sub %}
+  <a href="/r/{{subreddit}}">{{subreddit}}</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <a class="postlink" href="{{post.url}}">
+    <h3>{{post.title}}</h3>
+  </a>
+
+  <p class="dull">
+    {% if post.nsfw %}
+      <span class="nsfw">NSFW</span>
+    {% endif %}
+    submitted by 
+    <a href="/u/{{post.author.username}}" class="dull2">{{post.author.username}}</a> 
+    to 
+    <a href="{{post.sub_url}}" class="dull2">/r/{{post.sub.name}}</a>
+    &mu;
+    <a href="http://{{post.domain}}" class="dull4">[{{post.domain}}]</a>
+  </p>
+
+  {% if post.body %}
+  <div class="postbody">{{post.body|markdown}}</div>
+  {% endif %}
+
+  {% if user.is_authenticated %}
+  <div class="rootcomment">
+    <h3>leave comment as {{user.username}}</h3>
+    <form method="POST" action="/async/comment/" data-sniper="true">
+      {% csrf_token %}
+      {{rootcommentform.body}}
+      {{rootcommentform.post_id}}
+      {{rootcommentform.parent_id}}
+      <input class="btn" type="submit" value="submit" />
+    </form>
+    </div>
+  {% endif %}
+
+  <div class="comments">
+    {% for cc in post.get_comments %}
+      {% with template_name="recur_comment_view.html" post=post comment=cc color="colora" ncolor="colorb" %}
+        {% include template_name %}
+      {% endwith %}
+    {% endfor %}
+  </div>
+{% endblock %}

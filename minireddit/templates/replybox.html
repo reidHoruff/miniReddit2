@@ -1,0 +1,11 @@
+<div class="replybox">
+  <h3>leave comment as {{user.username}}</h3>
+  <a href="https://en.wikipedia.org/wiki/Markdown" class="markdown dull2">comments support markdown</a>
+  <form method="POST" action="/async/comment/" data-sniper="true">
+    {% csrf_token %}
+    {{commentform.body}}
+    {{commentform.post_id}}
+    {{commentform.parent_id}}
+    <input class="btn" type="submit" value="submit" />
+  </form>
+</div>

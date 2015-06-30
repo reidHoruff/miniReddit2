@@ -1,0 +1,88 @@
+{% extends 'with_side.html' %}
+
+{% load staticfiles %}
+{% load sniper %}
+
+{% block title %}
+{% if is_sub %}
+&mu;eddit - /r/{{subreddit}}
+{% else %}
+&mu;eddit - homepage
+{% endif %}
+{% endblock %}
+
+{% block extracss %}
+  {{block.super}}
+  <link href="{% static 'css/home.css' %}" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
+{% block subtitle %}
+  {% if is_sub %}
+    <a href="/r/{{subreddit}}">{{subreddit}}</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {% for post in posts %}
+    <div class="post">
+      <div class="scoring c">
+        <a href="#up" data-sniper="/async/vote?type=post&id={{post.id}}&value=u">
+          <img class="arrow-up" src="/static/img/up.png"></img>
+        </a>
+        <div class="score c">
+          <p class="b g" id="score-{{post.id}}">{{post.score}}</p>
+        </div>
+        <a href="#down" data-sniper="/async/vote?type=post&id={{post.id}}&value=d">
+          <img class="arrow-down flip" src="/static/img/up.png">
+        </a>
+      </div>
+      {% if post.thumb and not post.nsfw %}
+      <div class="thumb">
+        <img src="{{post.thumb}}" onerror="this.style.display='none';"></img>
+      </div>
+      {% endif %}
+      <div class="content">
+        <a href="{{post.url}}" class="title"><h4>{{post.title}}</h4></a>
+
+        {% if post.is_raw_imgur %}
+        <a href="#showimg" data-sniper="/async/showimg/?post_id={{post.id}}" class="expand">
+          <p>+</p>
+        </a>
+        {% elif post.body %}
+        <a href="#getbody" data-sniper="/async/getbody/?post_id={{post.id}}" class="expand">
+          <p>+</p>
+        </a>
+        {% endif %}
+
+        <p class="dull">
+          {% if post.nsfw %}
+            <span class="nsfw">NSFW</span>
+          {% endif %}
+          submitted by 
+          <a href="/u/{{post.author.username}}" class="dull2">{{post.author.username}}</a> 
+          to 
+          <a href="{{post.sub_url}}" class="dull2">/r/{{post.sub.name}}</a>
+          &mu;
+          <a href="http://{{post.domain}}" class="dull4">[{{post.domain}}]</a>
+        </p>
+
+        <div class="actions">
+          <a href="/r/{{post.sub.name}}/post/{{post.id}}" class="dull4 commentslink"><p>{{post.comments.count}} comments</p></a>
+          <a href="/r/{{post.sub.name}}/post/{{post.id}}" class="dull4 commentslink"><p>save</p></a>
+        </div>
+
+        <div class="body-insert body-insert-{{post.id}}"></div>
+      </div>
+    </div>
+  {% endfor %}
+
+{% endblock %}
+
+{% block end %}
+  <div class="paginate c">
+    {% if start > 0 %}
+    <a href="{{prev}}" class="btn btn-primary">&lt; prev</a>
+    {% endif %}
+    <a href="{{next}}" class="btn btn-primary">next &gt;</a>
+  </div>
+{% endblock %}
